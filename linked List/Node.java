@@ -5,7 +5,6 @@ public class Node {
     public Node(int data){
         this.data = data;
         this.next = null;
-
     }
 
     static Node insertAtfront(Node head, int x){
@@ -16,59 +15,77 @@ public class Node {
 
     static Node insertAtlast(Node head, int x){
         Node newNode = new Node(x);
-        Node temp = head;
-
-        while (temp.next != null){
-            temp =temp.next;
+        if (head == null) {
+            return newNode;
         }
-        temp.next = new Node(x);
+        Node temp = head;
+        while (temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = newNode;
         return head;
+    }
 
+    static Node insertAtSpecificPosition(Node head, int x, int position){
+        if (position == 1){
+            Node newnode = new Node(x);
+            newnode.next = head;
+            return newnode;
+        }
+        
+        Node temp = head;
+        for (int i = 1; i < position - 1; i++){
+            if (temp == null) {
+                System.out.println("Position out of range");
+                return head;
+            }
+            temp = temp.next;
+        }
+        
+        if (temp == null) {
+            System.out.println("Position out of range");
+            return head;
+        }
+        
+        Node newnode = new Node(x);
+        newnode.next = temp.next;
+        temp.next = newnode;
+        return head;
     }
 
     static Node deleteNode(Node head){
         if (head == null){
             return null;
         }
-
-        Node temp = head;
-        head = head.next;
-        return head;
+        return head.next;
     }
 
     static Node deletedtail(Node head){
-        if (head == null){
-            return null;
-        }
-        if (head.next == null){
+        if (head == null || head.next == null){
             return null;
         }
 
         Node temp = head;
-        while (temp.next.next == null){
+        while (temp.next.next != null){
             temp = temp.next;
         }
-
         temp.next = null;
         return head;
-
     }
-    class Main{
-        public static void main(String[] args) {
-            Node head = new Node(10);
-            head.next = new Node(20);
-            head.next.next = new Node(30);
-            head.next.next.next = new Node(40);
+}
 
-            // Dispaly the linked list
-            Node temp = head;
-            while (temp != null){
-                System.out.println(temp.data + " ");
-                temp = temp.next;
+class Main {
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+        head.next.next.next = new Node(40);
 
-            }
+        // Display the linked list
+        Node temp = head;
+        while (temp != null){
+            System.out.print(temp.data + " ");
+            temp = temp.next;
         }
     }
-    
-    
 }
