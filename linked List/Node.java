@@ -27,30 +27,22 @@ public class Node {
     }
 
     static Node insertAtSpecificPosition(Node head, int x, int position){
+        Node newnode = new Node(x);
+
         if (position == 1){
-            Node newnode = new Node(x);
             newnode.next = head;
             return newnode;
+
         }
-        
+
         Node temp = head;
         for (int i = 1; i < position - 1; i++){
-            if (temp == null) {
-                System.out.println("Position out of range");
-                return head;
-            }
             temp = temp.next;
         }
-        
-        if (temp == null) {
-            System.out.println("Position out of range");
-            return head;
-        }
-        
-        Node newnode = new Node(x);
+
         newnode.next = temp.next;
-        temp.next = newnode;
-        return head;
+        temp.next = new newnode;
+        
     }
 
     static Node deleteNode(Node head){
