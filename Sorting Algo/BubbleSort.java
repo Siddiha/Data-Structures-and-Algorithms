@@ -1,34 +1,27 @@
-import java.util.Arrays;
-
-public class BubbleSort {
+public class BubbleSort{
     public static void main(String[] args) {
-        int[] arr = {-1, 5, 12, 3, 12};
-
-        selection(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr = {-1, 7, 32, 24, -12};
+        bubble(arr);
     }
 
-    static void selection(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            int last = arr.length - i - 1;
-            int maxIndex = getMaxIndex(arr, 0, last);
-            swap(arr, maxIndex, last);
-        }
-    }
+    static void bubble(int[] arr){
+        boolean swapped;
 
-    static int getMaxIndex(int[] arr, int start, int end) {
-        int maxIndex = start;
-        for (int i = start; i <= end; i++) {
-            if (arr[i] > arr[maxIndex]) {
-                maxIndex = i;
+        for (int i = 0; i < arr.length; i++){
+            swapped = false;
+
+            for (int j = 0 ; j < arr.length - i ; j++){
+                if ( arr[j] < arr[j - 1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            if (!swapped){
+                break;
             }
         }
-        return maxIndex;
-    }
-
-    static void swap(int[] arr, int first, int second) {
-        int temp = arr[first];
-        arr[first] = arr[second];
-        arr[second] = temp;
     }
 }
